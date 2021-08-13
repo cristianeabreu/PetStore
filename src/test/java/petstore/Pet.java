@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.contains;
 
@@ -24,7 +25,7 @@ public class Pet {
     }
 
     // Incluir - Create - Post
-    @Test  // Identifica o método ou função como um teste para o TestNG
+    @Test (priority=1) // Identifica o método ou função como um teste para o TestNG
     public void incluirPet() throws IOException {
         String jsonBody = lerJson("db/pet1.json");
 
@@ -50,5 +51,27 @@ public class Pet {
 
 
     }
+    @Test (priority=2)
+    public void consultarPet(){
+        String petId = "1819870900";
+
+        given()
+                .contentType("application/json")
+                .log().all()
+        .when()
+                .get(uri + "/" + petId)
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("name", is("Mel"))
+                .body("category.name", is("cat"))
+                .body("status", is("available"))
+
+
+        ;
+
+    }
+
 
 }
+
