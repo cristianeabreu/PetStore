@@ -51,6 +51,8 @@ public class Pet {
 
 
     }
+
+    // Consultar - Read - Get
     @Test (priority=2)
     public void consultarPet(){
         String petId = "1819870900";
@@ -67,9 +69,28 @@ public class Pet {
                 .body("category.name", is("cat"))
                 .body("status", is("available"))
 
-
         ;
 
+    }
+
+    // Alterar - Update - Put
+    @Test (priority=3)
+    public void alterarPet() throws IOException {
+        String jsonBody = lerJson("db/pet2.json");
+
+        given()
+                .contentType("application/json")
+                .log().all()
+                .body(jsonBody)
+        .when()
+                .put(uri)
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("name", is("Mel"))
+                .body("status", is("sold"))
+
+        ;
     }
 
 

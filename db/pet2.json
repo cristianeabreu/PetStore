@@ -1,0 +1,18 @@
+{
+  "id": 1819870900,
+  "category": {
+    "id": 1,
+    "name": "cat"
+  },
+  "name": "Mel",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 2021,
+      "name": "sta"
+    }
+  ],
+  "status": "sold"
+}
